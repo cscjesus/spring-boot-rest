@@ -1,4 +1,4 @@
-package edu.jhl.model;
+package edu.jhl.models;
 
 public class Home {
     private String gretting;
