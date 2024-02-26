@@ -25,4 +25,8 @@ public class Car {
         this.price = price;
         this.owner= owner;
     }
+
+    public Car() {
+
+    }
 }
