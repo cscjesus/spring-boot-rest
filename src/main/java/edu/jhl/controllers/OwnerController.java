@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("api/owners")
@@ -13,20 +15,21 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
     @GetMapping
-    public List<Owner> listar(){
-        return ownerService.getAllOwners();
+    public ResponseEntity<List<Owner>> listar(){
+        return ResponseEntity.ok(ownerService.getAllOwners());
     }
     @PostMapping
-    public Owner crear(@RequestBody Owner  owner){
-        return ownerService.createOwner(owner);
+    public ResponseEntity<Owner> crear(@RequestBody Owner  owner){
+        return new ResponseEntity<>( ownerService.createOwner(owner),HttpStatus.CREATED);
     }
     @PutMapping("edit/{id}")
-    public Owner actualizar(@RequestBody Owner owner,@PathVariable long id){
+    public ResponseEntity<Owner> actualizar(@RequestBody Owner owner,@PathVariable long id){
         owner.setOwnerid(id);
-        return ownerService.updateOwner(owner);
+        return ResponseEntity.ok(ownerService.updateOwner(owner));
     }
     @DeleteMapping("delete/{id}")
-    public void eliminar(@PathVariable long id){
+    public ResponseEntity<String> eliminar(@PathVariable long id){
         ownerService.deleteOwner(id);
+        return ResponseEntity.ok("Owner deleted successfully");
     }
 }
