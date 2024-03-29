@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Car {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private  String brand,model,color,registerNumber;
     private int modelYear,price;

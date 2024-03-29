@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api/owners")
 public class OwnerController {
@@ -17,6 +18,10 @@ public class OwnerController {
     @GetMapping
     public ResponseEntity<List<Owner>> listar(){
         return ResponseEntity.ok(ownerService.getAllOwners());
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Owner> listarById(@PathVariable long id){
+        return ResponseEntity.ok(ownerService.findOwnerById(id));
     }
     @PostMapping
     public ResponseEntity<Owner> crear(@RequestBody Owner  owner){
